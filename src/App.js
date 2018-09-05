@@ -8,7 +8,8 @@ class App extends Component {
     super()
     this.state = {
       albums: [],
-      input: ''
+      input: '',
+      alertMessage: ''
     }
   }
 
@@ -16,9 +17,19 @@ class App extends Component {
     const baseURL = `https://itunes.apple.com/search?term=${input}&entity=album`
     fetch(baseURL)
       .then(resp => resp.json())
-      .then(data => this.setState({
-        albums: data.results
-      }))
+      .then(data => {
+        if (data.resultCount) {
+          this.setState({
+            albums: data.results,
+            alertMessage: ''
+          })
+        } else {
+            this.setState({
+              alertMessage: `There don't appear to be any artists by the name of ${input}. Plz try again!`,
+              albums: []
+            })
+        }
+      })
   }
 
   handleChange = (e) => {
@@ -36,14 +47,15 @@ class App extends Component {
 
   render() {  
     const { albums } = this.state  
-    console.log(albums)
+    // console.log(albums)
     return (
       <div className="App">
         <h1>Welcome to iTunes Artist Search!</h1>
         <input placeholder="Artist Name" value={this.state.input} onChange={this.handleChange} />
-        <button onClick={this.handleSearch} >Search!</button>
+        <button onClick={this.handleSearch} >Search</button>
         <br />
         { albums.length ? <h4>Albums by {albums[0].artistName}</h4> : ''}
+        { this.state.alertMessage ? <h3>{this.state.alertMessage}</h3> : ''}
         <ArtistContainer albums={this.state.albums} />
       </div>
     );

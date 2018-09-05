@@ -3,8 +3,10 @@ import React from 'react'
 const ArtistCard = ({image, title}) => {
     return (
         <div className="col" >
-            <img src={image} />
-            <h6>{title}</h6>
+            <div className="img">
+                <img src={image} />
+            </div>
+            <h5>{title}</h5>
         </div>
     )
 }
