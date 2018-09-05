@@ -4,7 +4,7 @@ const ArtistCard = ({image, title}) => {
     return (
         <div className="col" >
             <div className="img">
-                <img src={image} />
+                <img alt={`Album cover for ${title}`} src={image} />
             </div>
             <h5>{title}</h5>
         </div>
