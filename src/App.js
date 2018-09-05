@@ -30,6 +30,7 @@ class App extends Component {
             })
         }
       })
+      .catch(error => console.error('Error:', error))
   }
 
   handleChange = (e) => {
@@ -54,7 +55,7 @@ class App extends Component {
         <input placeholder="Artist Name" value={this.state.input} onChange={this.handleChange} />
         <button onClick={this.handleSearch} >Search</button>
         <br />
-        { albums.length ? <h4>Albums by {albums[0].artistName}</h4> : ''}
+        { albums.length ? <h4>Albums by {albums[3].artistName}</h4> : ''}
         { this.state.alertMessage ? <h3>{this.state.alertMessage}</h3> : ''}
         <ArtistContainer albums={this.state.albums} />
       </div>
