@@ -29,14 +29,21 @@ class App extends Component {
 
   handleSearch = () => {    
     this.fetchArtist(this.state.input)
+    this.setState({
+      input: ''
+    })
   }
 
-  render() {    
+  render() {  
+    const { albums } = this.state  
+    console.log(albums)
     return (
       <div className="App">
         <h1>Welcome to iTunes Artist Search!</h1>
-        <input onChange={this.handleChange} />
+        <input placeholder="Artist Name" value={this.state.input} onChange={this.handleChange} />
         <button onClick={this.handleSearch} >Search!</button>
+        <br />
+        { albums.length ? <h4>Albums by {albums[0].artistName}</h4> : ''}
         <ArtistContainer albums={this.state.albums} />
       </div>
     );

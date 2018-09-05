@@ -1,7 +1,13 @@
 .flex-grid {
   display: flex;
+  flex-wrap: wrap;  
 }
 
 .col {
-  flex: 1;
+  flex: 25%;
+  max-width: 25%; 
+}
+
+.App {
+  text-align: center;
 }
